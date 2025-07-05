@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+body {
+    background: #f5f6fa;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+h1 {
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: #1a73e8;
+    letter-spacing: 1px;
+}
+
+p {
+    font-size: 15px;
+    color: #5f6368;
+    margin: 20px 0 25px;
+}
+
+a {
+    color: #1a73e8;
+    text-decoration: none;
+    transition: text-decoration 0.3s;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* Form Container */
+.container {
+    width: 900px;
+    max-width: 100%;
+    min-height: 650px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 32px rgba(60,64,67,.16), 0 1.5px 5px 2.5px rgba(60,64,67,.06);
+    overflow: hidden;
+    position: relative;
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* Panel layout revised for Google Drive feel */
+.form-container {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+}
+.overlay-container {
+    width: 50%;
+    /* background: #f5f6fa; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.overlay {
+    width: 100%;
+    text-align: center;
+}
+.overlay .overlay-panel {
+    padding: 0 24px;
+}
+.overlay h1 {
+    color: #202124;
+    font-size: 2rem;
+    font-weight: 700;
+}
+.overlay p {
+    color: #5f6368;
+    font-size: 1rem;
+}
+
+form {
+    width: 100%;
+    max-width: 370px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input, select {
+    font-family: 'Roboto', sans-serif;
+    background: #f1f3f4;
+    border: 1px solid #dadce0;
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin: 7px 0;
+    width: 100%;
+    font-size: 1rem;
+    color: #202124;
+    transition: border .2s;
+}
+input:focus, select:focus {
+    outline: none;
+    border: 1.5px solid #1a73e8;
+    background: #fff;
+}
+
+button {
+    font-family: 'Roboto', sans-serif;
+    border-radius: 4px;
+    border: none;
+    background: #1a73e8;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 0;
+    width: 100%;
+    margin-top: 16px;
+    transition: background .2s;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+button:hover {
+    background: #174ea6;
+}
+button.ghost {
+    background: #fff;
+    color: #1a73e8;
+    border: 2px solid #1a73e8;
+    margin-top: 18px;
+}
+button.ghost:hover {
+    background: #e8f0fe;
+}
+
+.error {
+    color: #d93025;
+    background: #fce8e6;
+    border: 1px solid #f7c6c8;
+    padding: 12px;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.social-container {
+    margin: 10px 0 16px 0;
+}
+.social-container a {
+    background: #e9eaee;
+    color: #1a73e8;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 4px;
+    height: 40px;
+    width: 40px;
+    font-size: 18px;
+    border: 1px solid #e9eaee;
+    transition: background .2s, color .2s;
+}
+.social-container a:hover {
+    background: #dbeafe;
+    color: #174ea6;
+}

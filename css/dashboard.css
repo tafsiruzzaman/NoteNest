@@ -1,0 +1,105 @@
+/* Brand styles (navbar) */
+.brand-icon {
+    color: #1a73e8;
+}
+.brand-text {
+    font-size: 1.4rem;
+    color: #1a73e8;
+    letter-spacing: 1px;
+    font-family: 'Roboto', sans-serif;
+}
+.user-name {
+    font-size: 1.08rem;
+}
+.support-link, .logout-link {
+    font-size: 1.05rem;
+    margin-left: 10px;
+    transition: background 0.2s, color 0.2s;
+}
+.support-link:hover {
+    background: #e8f0fe;
+    color: #174ea6 !important;
+    text-decoration: none;
+}
+.logout-link {
+    color: #d93025 !important;
+    font-weight: 600;
+}
+.logout-link:hover {
+    background: #fce8e6;
+    color: #b31412 !important;
+    text-decoration: none;
+}
+
+/* Card accent for dashboard, forms, note upload box */
+.card {
+    border-radius: 12px;
+    box-shadow: 0 2px 16px 0 rgba(26,115,232,0.04);
+    border: 1px solid #f1f1f1;
+}
+.card-header {
+    border-radius: 12px 12px 0 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.card-hov {
+    transition: transform 0.18s, box-shadow 0.2s;
+}
+.card-hov:hover {
+    transform: translateY(-3px) scale(1.018);
+    box-shadow: 0 8px 24px rgba(26,115,232,.07);
+}
+
+/* Table accent: minimal border, spacing */
+.table thead th {
+    background: #f5f6fa;
+    color: #1a73e8;
+    border-bottom: 2px solid #e5e8ee;
+    font-weight: 600;
+}
+.table > tbody > tr > td,
+.table > tbody > tr > th {
+    border-top: 1px solid #f0f3f7;
+}
+.table-hover > tbody > tr:hover {
+    background: #f6faff;
+}
+
+/* Action buttons (download/preview/delete) */
+.btn-outline-secondary, .btn-outline-info, .btn-outline-danger {
+    border-radius: 20px;
+}
+.btn-outline-info {
+    color: #1976d2;
+    border-color: #1976d2;
+}
+.btn-outline-info:hover {
+    background: #e6f0fa;
+    color: #125199;
+}
+.btn-outline-secondary:hover {
+    background: #f1f8ff;
+}
+
+/* Responsive tweaks for note upload/notes list */
+@media (max-width: 991px) {
+    .row.g-5 {
+        flex-direction: column;
+    }
+    .col-md-4, .col-md-8 {
+        max-width: 100%;
+        flex: 100%;
+    }
+}
+
+/* Spacing and base background */
+body {
+    background: #f5f6fa;
+}
+.navbar {
+    margin-bottom: 1.5rem;
+}
+.card {
+    margin-bottom: 2rem;
+}
