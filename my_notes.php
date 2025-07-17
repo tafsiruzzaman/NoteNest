@@ -8,9 +8,8 @@ if (!isset($_SESSION['user_id'])) {
 }
 $user_id = $_SESSION['user_id'];
 $upload_error = "";
-$success_msg = "";
 
-// Handle file upload
+// Handle file upload (POST-Redirect-GET)
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['note_file'])) {
     $file_name = trim(htmlspecialchars($_POST['file_name'] ?? ''));
     $file = $_FILES['note_file'];
@@ -32,8 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['note_file'])) {
         if (move_uploaded_file($file['tmp_name'], $target_path)) {
             $stmt = $conn->prepare("INSERT INTO notes (user_id, file_name, stored_file) VALUES (?, ?, ?)");
             $stmt->bind_param('iss', $user_id, $file_name, $rand_file);
-            $stmt->execute(); $stmt->close();
-            $success_msg = "Note uploaded!";
+            $stmt->execute(); 
+            $stmt->close();
+            $_SESSION['success_msg'] = "Note uploaded!";
+            header("Location: my_notes.php");
+            exit;
         } else {
             $upload_error = "Failed to save file.";
         }
@@ -95,12 +97,13 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
           <i class="fas fa-upload me-2"></i>Add New Note (.txt)
         </div>
         <div class="card-body">
+          <?php if(isset($_SESSION['success_msg'])): ?>
+            <div class="alert alert-success py-2"><?= $_SESSION['success_msg']; unset($_SESSION['success_msg']); ?></div>
+          <?php endif; ?>
           <?php if($upload_error): ?>
             <div class="alert alert-danger py-2"><?= $upload_error ?></div>
-          <?php elseif($success_msg): ?>
-            <div class="alert alert-success py-2"><?= $success_msg ?></div>
           <?php endif; ?>
-          <form method="post" enctype="multipart/form-data">
+          <form method="post" enctype="multipart/form-data" autocomplete="off">
             <div class="mb-2">
               <label class="form-label">Note Name</label>
               <input type="text" name="file_name" class="form-control" maxlength="100" required placeholder="Enter note name">

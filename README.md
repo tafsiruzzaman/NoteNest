@@ -161,7 +161,8 @@ Users can upload new images to their account.
 
 - [@tafsiruzzaman](https://github.com/tafsiruzzaman)
 - [@pritilatadea](https://github.com/pritilatadea)
-
+- [@MonsurulHoqueAkib](https://github.com/MonsurulHoqueAkib)
+- [@tjarin](https://github.com/tjarin)
 ---
 
 ## Security Highlights
@@ -188,6 +189,6 @@ Users can upload new images to their account.
 
 ## License
 
-MIT License. © [@tafsiruzzaman](https://github.com/tafsiruzzaman), [@pritilatadea](https://github.com/pritilatadea)
+MIT License. © [@tafsiruzzaman](https://github.com/tafsiruzzaman), [@pritilatadea](https://github.com/pritilatadea), [@MonsurulHoqueAkib](https://github.com/MonsurulHoqueAkib), [@tjarin](https://github.com/tjarin)
 
 ---
