@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create_folder'])) {
             $stmt->execute();
             $stmt->close();
             $_SESSION['success_msg'] = "Folder created!";
+            $_SESSION['history_flatten'] = true;
             header("Location: my_images.php" . ($current_folder_id ? "?folder=$current_folder_id" : ""));
             exit;
         }
@@ -90,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['rename_folder'])) {
             $_SESSION['success_msg'] = "Folder renamed!";
         }
     }
+    $_SESSION['history_flatten'] = true;
     header("Location: my_images.php" . ($current_folder_id ? "?folder=$current_folder_id" : ""));
     exit;
 }
@@ -129,6 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['image_file'])) {
             $stmt->execute();
             $stmt->close();
             $_SESSION['success_msg'] = "Image uploaded!";
+            $_SESSION['history_flatten'] = true;
             header("Location: my_images.php" . ($current_folder_id ? "?folder=$current_folder_id" : ""));
             exit;
         } else {
@@ -148,6 +151,7 @@ if (isset($_GET['delete_img']) && is_numeric($_GET['delete_img'])) {
         $stmt->fetch(); $stmt->close();
         $conn->query("DELETE FROM images WHERE id=$id");
         @unlink(__DIR__ . "/uploads/images/$stored_file");
+        $_SESSION['history_flatten'] = true;
         header("Location: my_images.php" . ($img_folder_id ? "?folder=" . $img_folder_id : ""));
         exit;
     }
@@ -170,6 +174,9 @@ if (isset($_GET['delete_folder']) && is_numeric($_GET['delete_folder'])) {
 
         if ($has_subfolders || $has_images) {
             $_SESSION['folder_delete_error'] = "Folder is not empty.";
+            $_SESSION['history_flatten'] = true;
+            header("Location: my_images.php" . ($current_folder_id ? "?folder=$current_folder_id" : ""));
+            exit;
         } else {
             $stmt = $conn->prepare("SELECT parent_id FROM image_folders WHERE id=?");
             $stmt->bind_param('i', $folder_id);
@@ -179,11 +186,10 @@ if (isset($_GET['delete_folder']) && is_numeric($_GET['delete_folder'])) {
             $stmt->close();
             $conn->query("DELETE FROM image_folders WHERE id = $folder_id");
             $_SESSION['success_msg'] = "Folder deleted.";
+            $_SESSION['history_flatten'] = true;
             header("Location: my_images.php" . ($redirect_parent_id ? "?folder=$redirect_parent_id" : ""));
             exit;
         }
-        header("Location: my_images.php" . ($current_folder_id ? "?folder=$current_folder_id" : ""));
-        exit;
     }
 }
 
@@ -249,36 +255,8 @@ if ($modal_message) {
 <title>My Images - NoteNest</title>
 <link rel="shortcut icon" href="img/fav.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/my_images.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-  .section-heading {
-      color: #197f8f;
-      font-weight: 700;
-      font-size: 1.3rem;
-      letter-spacing: 1px;
-      margin-bottom: 0.6rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-  }
-  .section-heading .fa-folder-open,
-  .section-heading .fa-image {
-      font-size: 1.5rem;
-      vertical-align: middle;
-  }
-  .section-heading + .card, 
-  .section-heading + .alert,
-  .section-heading + .list-group {
-      margin-top: 0 !important;
-  }
-  .alert-secondary {
-      background: #e4e7eb;
-      color: #555;
-      border: none;
-      border-radius: 8px;
-  }
-</style>
 </head>
 <body>
 <!-- Navbar -->
@@ -356,7 +334,7 @@ if ($modal_message) {
             <input type="file" name="image_file" accept=".jpg,.jpeg,.png,.gif" class="form-control" required>
           </div>
           <input type="hidden" name="parent_folder_id" value="<?= htmlspecialchars($current_folder_id ?? '') ?>">
-          <button type="submit" class="btn mt-2 w-100" style="background-color: #197f8f; color: white">
+          <button type="submit" class="btn upload-btn mt-2 w-100 text-white">
               <i class="fas fa-upload"></i> Upload Image
           </button>
         </form>
@@ -539,5 +517,12 @@ document.querySelectorAll('.rename-folder-btn').forEach(function(btn) {
     setTimeout(() => { feedbackModal.hide(); }, 2500);
 <?php endif; ?>
 </script>
+<?php if (!empty($_SESSION['history_flatten'])): ?>
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+</script>
+<?php unset($_SESSION['history_flatten']); endif; ?>
 </body>
 </html>

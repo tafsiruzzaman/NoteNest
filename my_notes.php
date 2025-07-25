@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create_folder'])) {
         $stmt->execute(); $stmt->store_result();
         if ($stmt->num_rows > 0) {
             $folder_error = "A folder with this name already exists here.";
+            $stmt->close();
         } else {
             $stmt->close();
             $stmt = $conn->prepare("INSERT INTO note_folders (user_id, folder_name, parent_id) VALUES (?, ?, ?)");
@@ -53,10 +54,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['create_folder'])) {
             $stmt->execute();
             $stmt->close();
             $_SESSION['success_msg'] = "Folder created!";
-            header("Location: my_notes.php" . ($current_folder_id ? "?folder=$current_folder_id" : ""));
-            exit;
+            $folder_error = ""; // Clear folder_error on success
         }
-        $stmt->close();
+    }
+    if ($folder_error == "") {
+        $_SESSION['history_flatten'] = true;
+        header("Location: my_notes.php" . ($current_folder_id ? "?folder=$current_folder_id" : ""));
+        exit;
     }
 }
 
@@ -92,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['rename_folder'])) {
             $_SESSION['success_msg'] = "Folder renamed!";
         }
     }
+    $_SESSION['history_flatten'] = true;
     header("Location: my_notes.php" . ($current_folder_id ? "?folder=$current_folder_id" : ""));
     exit;
 }
@@ -130,11 +135,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['note_file'])) {
             $stmt->execute();
             $stmt->close();
             $_SESSION['success_msg'] = "Note uploaded!";
-            header("Location: my_notes.php" . ($current_folder_id ? "?folder=$current_folder_id" : ""));
-            exit;
+            $upload_error = ""; // Clear upload_error on success
         } else {
             $upload_error = "Failed to save file.";
         }
+    }
+    if ($upload_error == "") {
+        $_SESSION['history_flatten'] = true;
+        header("Location: my_notes.php" . ($current_folder_id ? "?folder=$current_folder_id" : ""));
+        exit;
     }
 }
 
@@ -148,6 +157,7 @@ if (isset($_GET['delete_note']) && is_numeric($_GET['delete_note'])) {
         $stmt->bind_result($stored_file, $note_folder_id); $stmt->fetch(); $stmt->close();
         $conn->query("DELETE FROM notes WHERE id=$id");
         @unlink(__DIR__ . "/uploads/notes/$stored_file");
+        $_SESSION['history_flatten'] = true;
         header("Location: my_notes.php" . ($note_folder_id ? "?folder=" . $note_folder_id : ""));
         exit;
     }
@@ -170,6 +180,9 @@ if (isset($_GET['delete_folder']) && is_numeric($_GET['delete_folder'])) {
 
         if ($has_subfolders || $has_notes) {
             $_SESSION['folder_delete_error'] = "Folder is not empty.";
+            $_SESSION['history_flatten'] = true;
+            header("Location: my_notes.php" . ($current_folder_id ? "?folder=$current_folder_id" : ""));
+            exit;
         } else {
             $stmt = $conn->prepare("SELECT parent_id FROM note_folders WHERE id=?");
             $stmt->bind_param('i', $folder_id);
@@ -179,13 +192,20 @@ if (isset($_GET['delete_folder']) && is_numeric($_GET['delete_folder'])) {
             $stmt->close();
             $conn->query("DELETE FROM note_folders WHERE id = $folder_id");
             $_SESSION['success_msg'] = "Folder deleted.";
+            $_SESSION['history_flatten'] = true;
             header("Location: my_notes.php" . ($redirect_parent_id ? "?folder=$redirect_parent_id" : ""));
             exit;
         }
-        header("Location: my_notes.php" . ($current_folder_id ? "?folder=$current_folder_id" : ""));
-        exit;
     }
 }
+
+// After successful add/delete, set a session flag for history flattening
+// This block is now redundant as history flattening is handled by the specific POST/GET redirects
+// if (isset($_SESSION['success_msg']) || isset($_SESSION['folder_delete_error'])) {
+//     $_SESSION['history_flatten'] = true;
+//     header("Location: my_notes.php" . ($current_folder_id ? "?folder=$current_folder_id" : ""));
+//     exit;
+// }
 
 // --- Folders/Notes for current folder:
 $folders = [];
@@ -249,37 +269,8 @@ if ($modal_message) {
   <title>My Notes - NoteNest</title>
   <link rel="shortcut icon" href="img/fav.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/my_notes.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    .modal-content pre { white-space: pre-wrap; word-wrap: break-word; }
-    .section-heading {
-        color: #0b4954;
-        font-weight: 700;
-        font-size: 1.3rem;
-        letter-spacing: 1px;
-        margin-bottom: 0.6rem;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .section-heading .fa-folder-open,
-    .section-heading .fa-note-sticky {
-        font-size: 1.5rem;
-        vertical-align: middle;
-    }
-    .section-heading + .card, 
-    .section-heading + .alert,
-    .section-heading + .list-group {
-        margin-top: 0 !important;
-    }
-    .alert-secondary {
-        background: #e4e7eb;
-        color: #555;
-        border: none;
-        border-radius: 8px;
-    }
-  </style>
 </head>
 <body>
 <!-- Navbar -->
@@ -357,8 +348,8 @@ if ($modal_message) {
               <input type="file" name="note_file" accept=".txt" class="form-control" required>
             </div>
             <input type="hidden" name="parent_folder_id" value="<?= htmlspecialchars($current_folder_id ?? '') ?>">
-            <button type="submit" class="btn mt-2 w-100 text-white" style="background-color: #0b4954">
-              <i class="fas fa-upload"></i> Upload Note
+            <button type="submit" class="btn upload-btn mt-2 w-100 text-white">
+                <i class="fas fa-upload"></i> Upload Note
             </button>
           </form>
         </div>
@@ -540,5 +531,12 @@ document.querySelectorAll('.rename-folder-btn').forEach(function(btn) {
     setTimeout(() => { feedbackModal.hide(); }, 2500);
 <?php endif; ?>
 </script>
+<?php if (!empty($_SESSION['history_flatten'])): ?>
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+</script>
+<?php unset($_SESSION['history_flatten']); endif; ?>
 </body>
 </html>

@@ -35,7 +35,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Form Container */
 .container {
     width: 900px;
     max-width: 100%;
@@ -52,7 +51,6 @@ a:hover {
     padding: 0;
 }
 
-/* Panel layout revised for Google Drive feel */
 .form-container {
     width: 50%;
     display: flex;
@@ -62,7 +60,6 @@ a:hover {
 }
 .overlay-container {
     width: 50%;
-    /* background: #f5f6fa; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,7 +89,7 @@ form {
     align-items: center;
 }
 
-input, select {
+input {
     font-family: 'Roboto', sans-serif;
     background: #f1f3f4;
     border: 1px solid #dadce0;
@@ -104,7 +101,7 @@ input, select {
     color: #202124;
     transition: border .2s;
 }
-input:focus, select:focus {
+input:focus {
     outline: none;
     border: 1.5px solid #1a73e8;
     background: #fff;
@@ -176,4 +173,4 @@ button.ghost:hover {
 
 .btn-color:hover {
     background-color: #0b4954;
-}
+} 

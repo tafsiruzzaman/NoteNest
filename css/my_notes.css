@@ -1,0 +1,131 @@
+/* My Notes Page Styles */
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+body {
+    background: #f5f6fa;
+    font-family: 'Roboto', sans-serif;
+}
+.section-heading {
+    color: #0b4954;
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.section-heading .fa-folder-open,
+.section-heading .fa-note-sticky {
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+.section-heading + .card, 
+.section-heading + .alert,
+.section-heading + .list-group {
+    margin-top: 0 !important;
+}
+.alert-secondary {
+    background: #e4e7eb;
+    color: #555;
+    border: none;
+    border-radius: 8px;
+}
+.card {
+    border-radius: 12px;
+    box-shadow: 0 2px 16px 0 rgba(26,115,232,0.04);
+    border: 1px solid #f1f1f1;
+    margin-bottom: 2rem;
+}
+.card-header {
+    border-radius: 12px 12px 0 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.table thead th {
+    background: #f5f6fa;
+    color: #040404;
+    border-bottom: 2px solid #e5e8ee;
+    font-weight: 600;
+}
+.table > tbody > tr > td,
+.table > tbody > tr > th {
+    border-top: 1px solid #f0f3f7;
+}
+.table-hover > tbody > tr:hover {
+    background: #f6faff;
+}
+.btn-outline-secondary, .btn-outline-info, .btn-outline-danger {
+    border-radius: 20px;
+}
+.btn-outline-info {
+    color: #1976d2;
+    border-color: #1976d2;
+}
+.btn-outline-info:hover {
+    background: #e6f0fa;
+    color: #125199;
+}
+.btn-outline-secondary:hover {
+    background: #f1f8ff;
+    color: #040404;
+}
+.btn-primary-cs {
+    border: 1px solid #0b4954;
+    color: #0b4954;
+}
+.btn-primary-cs:hover {
+    background-color: #0b4954;
+    color: white;
+}
+.breadcrumb .breadcrumb-item a {
+    color: #040404 !important;
+    text-decoration: none !important;
+    font-weight: 500;
+}
+.breadcrumb .breadcrumb-item.active {
+    color: #040404 !important;
+    font-weight: 500;
+}
+.breadcrumb .breadcrumb-item {
+    color: #040404 !important;
+}
+.folder-icon {
+    font-size: 1.5rem;
+    color: #FFD600;
+    vertical-align: -0.2em;
+    margin-right: 12px;
+}
+.folder-link {
+    color: #040404;
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 500;
+    transition: color 0.19s;
+}
+.folder-link:hover {
+    color: #174ea6; 
+    text-decoration: none;
+}
+.upload-btn {
+    background-color: #0b4954;
+    color: #fff;
+    border: 1px solid #0b4954;
+    transition: background 0.2s, color 0.2s;
+}
+.upload-btn:hover {
+    background-color: #fff;
+    color: #040404;
+    border: 1px solid #0b4954;
+}
+.upload-btn.text-white:hover {
+    color: #040404 !important;
+}
+@media (max-width: 991px) {
+    .row.g-5 {
+        flex-direction: column;
+    }
+    .col-md-4, .col-md-8 {
+        max-width: 100%;
+        flex: 100%;
+    }
+} 
