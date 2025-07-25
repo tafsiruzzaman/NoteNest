@@ -1,6 +1,7 @@
 # NoteNest
 
 NoteNest is a secure, modern, and user-friendly personal cloud drive web application. It allows users to upload, preview, download, rename, organize, and manage TXT notes and image files—all with a polished, responsive interface and intuitive nested folders.
+
 ---
 
 ## Features
@@ -195,4 +196,5 @@ NoteNest is a secure, modern, and user-friendly personal cloud drive web applica
 ## License
 
 MIT License. © [@tafsiruzzaman](https://github.com/tafsiruzzaman), [@pritilatadea](https://github.com/pritilatadea), [@MonsurulHoqueAkib](https://github.com/MonsurulHoqueAkib), [@tjarin](https://github.com/tjarin)
+
 ---
