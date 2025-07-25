@@ -9,8 +9,8 @@ if (!isset($_SESSION['user_id'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - myDrive</title>
-    <link rel="shortcut icon" href="img/cloud.png" type="image/x-icon">
+    <title>Dashboard - NoteNest</title>
+    <link rel="shortcut icon" href="img/fav.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -21,8 +21,8 @@ if (!isset($_SESSION['user_id'])) {
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center" href="dashboard.php">
-        <i class="fas fa-cloud fa-lg me-2 brand-icon"></i>
-        <span class="brand-text fw-bold">myDrive</span>
+        <img src="img/fav.ico" height="45px" alt="">
+        <span class="brand-text fw-bold">NoteNest</span>
     </a>
     <div class="d-flex align-items-center ms-auto">
         <span class="me-3 user-name text-secondary"><i class="fas fa-user-circle me-1"></i>
@@ -43,20 +43,20 @@ if (!isset($_SESSION['user_id'])) {
         <div class="col-sm-6 col-md-4">
             <div class="card text-center card-hov">
                 <div class="card-body">
-                    <i class="fas fa-note-sticky fa-2x mb-3 text-primary"></i>
+                    <i class="fas fa-note-sticky fa-2x mb-3" style="color: #0b4954"></i>
                     <h5 class="card-title fw-bold">My Notes</h5>
                     <p class="card-text text-muted">View, add, and manage your text notes securely in the cloud.</p>
-                    <a href="my_notes.php" class="btn btn-outline-primary">Open Notes</a>
+                    <a href="my_notes.php" class="btn btn-primary-cs">Open Notes</a>
                 </div>
             </div>
         </div>
         <div class="col-sm-6 col-md-4">
             <div class="card text-center card-hov">
                 <div class="card-body">
-                    <i class="fas fa-image fa-2x mb-3 text-success"></i>
+                    <i class="fas fa-image fa-2x mb-3" style="color: #197f8f"></i>
                     <h5 class="card-title fw-bold">My Images</h5>
                     <p class="card-text text-muted">Upload and access your images from anywhere, anytime.</p>
-                    <a href="my_images.php" class="btn btn-outline-success">Open Images</a>
+                    <a href="my_images.php" class="btn btn-success-cs">Open Images</a>
                 </div>
             </div>
         </div>

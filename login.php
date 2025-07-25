@@ -47,8 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login - myDrive</title>
-    <link rel="shortcut icon" href="img/cloud.png" type="image/x-icon">
+    <title>Login - NoteNest</title>
+    <link rel="shortcut icon" href="img/fav.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/auth.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -57,13 +57,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container" id="container">
         <div class="form-container sign-in-container">
             <form action="login.php" method="POST">
-                <h1>Sign In to myDrive</h1>
+                <h1>Sign In to NoteNest</h1>
                 <div class="social-container">
                     <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
-                <span>or use your myDrive credentials</span>
+                <span>or use your NoteNest credentials</span>
                 <input type="email" name="email" required placeholder="Email" value="<?php echo htmlspecialchars($email); ?>" />
                 <input type="password" name="password" required placeholder="Password" value="<?php echo htmlspecialchars($password); ?>"/>
                 <a href="#">Forgot your password?</a>
@@ -76,14 +76,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo '</div>';
                     }
                 ?>
-                <button type="submit" class="btn">Log In</button>
+                <button type="submit" class="btn btn-color">Log In</button>
             </form>
         </div>
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
                     <h1>Manage Your Files!</h1>
-                    <p>Welcome to myDrive. Don't have an account?</p>
+                    <p>Welcome to NoteNest. Don't have an account?</p>
                     <button class="ghost"><a href="register.php">Sign Up</a></button>
                 </div>
             </div>

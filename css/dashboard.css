@@ -4,7 +4,7 @@
 }
 .brand-text {
     font-size: 1.4rem;
-    color: #1a73e8;
+    color: #0b4954;
     letter-spacing: 1px;
     font-family: 'Roboto', sans-serif;
 }
@@ -31,6 +31,7 @@
     text-decoration: none;
 }
 
+
 /* Card accent for dashboard, forms, note upload box */
 .card {
     border-radius: 12px;
@@ -54,7 +55,7 @@
 /* Table accent: minimal border, spacing */
 .table thead th {
     background: #f5f6fa;
-    color: #1a73e8;
+    color: #040404;
     border-bottom: 2px solid #e5e8ee;
     font-weight: 600;
 }
@@ -80,6 +81,7 @@
 }
 .btn-outline-secondary:hover {
     background: #f1f8ff;
+    color: #040404;
 }
 
 /* Responsive tweaks for note upload/notes list */
@@ -102,4 +104,80 @@ body {
 }
 .card {
     margin-bottom: 2rem;
+}
+
+.btn-primary-cs {
+    border: 1px solid #0b4954;
+    background-color: none;
+    color: #0b4954;
+}
+
+.btn-primary-cs:hover {
+    background-color: #0b4954;
+    color: white;
+}
+
+.btn-success-cs {
+    border: 1px solid #197f8f;
+    background-color: none;
+    color: #197f8f;
+}
+
+.btn-success-cs:hover {
+    background-color: #197f8f;
+    color: white;
+}
+
+
+/* Folders section heading */
+.folders-heading {
+    color: #0b4954;
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+}
+
+.folder-icon {
+    font-size: 1.5rem;
+    color: #FFD600;
+    vertical-align: -0.2em;
+    margin-right: 12px;
+}
+
+.folder-link {
+    color: #040404;
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 500;
+    transition: color 0.19s;
+}
+.folder-link:hover {
+    color: #174ea6; 
+    text-decoration: none;
+}
+
+.modal-img-preview {
+    max-width: 100%;
+    max-height: 65vh;
+    border-radius: 12px;
+    display: block;
+    margin: 0 auto;
+}
+
+.breadcrumb .breadcrumb-item a {
+    color: #040404 !important;
+    text-decoration: none !important;
+    font-weight: 500;
+}
+.breadcrumb .breadcrumb-item a:hover,
+.breadcrumb .breadcrumb-item a:focus {
+    color: #040404 !important;
+    text-decoration: none !important;
+}
+.breadcrumb .breadcrumb-item.active {
+    color: #040404 !important;
+    font-weight: 500;
+}
+.breadcrumb .breadcrumb-item {
+    color: #040404 !important;
 }

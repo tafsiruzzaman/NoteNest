@@ -55,8 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up - myDrive</title>
-    <link rel="shortcut icon" href="img/cloud.png" type="image/x-icon">
+    <title>Sign Up - NoteNest</title>
+    <link rel="shortcut icon" href="img/fav.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/auth.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container" id="container">
         <div class="form-container sign-in-container">
             <form action="register.php" method="POST">
-                <h1>Create myDrive Account</h1>
+                <h1>Create NoteNest Account</h1>
                 <div class="social-container">
 					<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
 					<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo '</div>';
                     }
                 ?>
-                <button type="submit" class="btn">Sign Up</button>
+                <button type="submit" class="btn btn-color">Sign Up</button>
             </form>
         </div>
         <div class="overlay-container">
