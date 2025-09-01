@@ -76,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="shortcut icon" href="img/fav.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/my_note_nest.css">
+  <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     .profile-img-preview { width:80px; height:80px; object-fit:cover; border-radius:50%; }
@@ -130,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <label class="form-label">Confirm Password</label>
               <input type="password" name="confirm_password" class="form-control" placeholder="Leave blank to keep unchanged">
             </div>
-            <button type="submit" class="btn btn-primary w-100"><i class="fas fa-save"></i> Update Profile</button>
+            <button type="submit" class="btn update-btn btn-primary w-100"><i class="fas fa-save"></i> Update Profile</button>
           </form>
         </div>
       </div>
