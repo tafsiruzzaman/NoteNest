@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+body {
+    background: #f5f6fa;
+    font-family: 'Roboto', sans-serif;
+}
+.section-heading {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #0b4954;
+    margin-bottom: 1rem;
+}
+.folder-list-group .folder-link {
+    color: #0b4954;
+    font-weight: 500;
+    text-decoration: none;
+}
+.folder-list-group .folder-link:hover {
+    text-decoration: underline;
+}
+.folder-icon {
+    color: #197f8f;
+    margin-right: 6px;
+}
+.upload-btn {
+    background: #0b4954;
+    color: #fff;
+}
+.upload-btn:hover {
+    background: #0b4954;
+    color: #fff;
+}
+.card {
+    border-radius: 12px;
+    box-shadow: 0 2px 16px 0 rgba(26,115,232,0.04);
+    border: 1px solid #f1f1f1;
+    margin-bottom: 2rem;
+}
+.card-header {
+    border-radius: 12px 12px 0 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: #0b4954;
+    color: #fff;
+}
+.breadcrumb {
+    background: #fff;
+    font-size: 1rem;
+}
+.breadcrumb-item.active {
+    color: #197f8f;
+    font-weight: 600;
+}

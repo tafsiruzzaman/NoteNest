@@ -1,7 +1,8 @@
 <?php
-require 'db.php';
+require 'includes/db.php';
 
-$name = $email = $password = $confirm_password = "";
+$name = $email = $password = $confirm_password = $phone = $gender = "";
+$photo = "";
 $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -9,6 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = htmlspecialchars(trim($_POST['email']));
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
+    $phone = htmlspecialchars(trim($_POST['phone']));
+    $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
+    $photo = isset($_FILES['photo']) ? $_FILES['photo'] : null;
 
     // Validation
     if (empty($name)) { $errors[] = "Name is required."; }
@@ -17,6 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($password)) { $errors[] = "Password is required."; }
     if (strlen($password) < 6) { $errors[] = "Password must be at least 6 characters."; }
     if ($password !== $confirm_password) { $errors[] = "Passwords do not match."; }
+    if (empty($phone)) { $errors[] = "Phone is required."; }
+    if (empty($gender)) { $errors[] = "Gender is required."; }
 
     // Check if email already exists
     $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
@@ -35,9 +41,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // If no errors, insert the user
     if (empty($errors)) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
+        $photo_path = 'img/user.png';
+        $stmt = $conn->prepare("INSERT INTO users (name, email, password, phone, gender, photo) VALUES (?, ?, ?, ?, ?, ?)");
         if ($stmt) {
-            $stmt->bind_param("sss", $name, $email, $hashed_password);
+            $stmt->bind_param("ssssss", $name, $email, $hashed_password, $phone, $gender, $photo_path);
             if ($stmt->execute()) {
                 header("Location: login.php");
                 exit();
@@ -74,6 +81,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($email); ?>" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                <input type="text" name="phone" placeholder="Phone" value="<?php echo htmlspecialchars($phone); ?>" required>
+                <select name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male" <?php if($gender=='Male') echo 'selected'; ?>>Male</option>
+                    <option value="Female" <?php if($gender=='Female') echo 'selected'; ?>>Female</option>
+                    <option value="Other" <?php if($gender=='Other') echo 'selected'; ?>>Other</option>
+                </select>
                 <?php
                     if (!empty($errors)) {
                         echo '<div class="error">';

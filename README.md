@@ -1,165 +1,79 @@
+
 # NoteNest
 
-NoteNest is a secure, modern, and user-friendly personal cloud drive web application. It allows users to upload, preview, download, rename, organize, and manage TXT notes and image files—all with a polished, responsive interface and intuitive nested folders.
+NoteNest is a web-based personal cloud drive for managing notes and files. It allows users to upload, organize, share, and download files and folders securely. The application is built with PHP and MySQL, and features a modern, responsive interface.
 
 ---
 
 ## Features
 
-- **User Authentication:** Secure registration and login required.
-- **Dashboard:** Modern, easy-to-use main page with navigation.
-- **Notes Management:**
-  - Upload, list, preview (modal), download, delete, and rename `.txt` note files
-  - Organize notes in nested folders, just like images
-- **Images Management:**
-  - Upload, list, preview (modal), download, delete, and rename `.jpg`, `.jpeg`, `.png`, `.gif` images
-  - Organize images in nested folders
-- **Folder Management:** Unlimited nested folders for both notes and images. Rename & delete folders (if empty), navigate via breadcrumbs.
-- **Responsive UI:** Built with [Bootstrap 5](https://getbootstrap.com/) and custom CSS for a modern, branded feel.
-- **Security:** Strict user isolation—users can only access their own files and folders.
-- **Favicon:** Custom favicon for a branded feel.
+- User registration and login
+- Dashboard with quick access to personal, shared, favorite, and todo sections
+- Upload, preview, download, rename, and delete files (any file type supported)
+- Organize files in unlimited nested folders
+- Share files and folders with other users (view-only)
+- Manage shared access and revoke sharing
+- Mark files and folders as favorites for quick access
+- Todo list with reminders and notifications
+- User profile management (name, phone, gender, photo, password)
+- Notifications for sharing and todo reminders
+- Security: user data isolation, input validation, password hashing, prepared statements
 
 ---
 
 ## Tech Stack
 
-- **Backend:** PHP (7.4+ recommended)
-- **Frontend:** HTML, Bootstrap 5, Font Awesome
-- **Database:** MySQL
-- **File Storage:** Files saved to local `/uploads/notes/` and `/uploads/images/`
-
----
-
-## Screenshots
-
-### 1. Register Page
-
-![Register](screenshots/register.jpeg)
-
-### 2. Login Page
-
-![Login](screenshots/login.jpeg)
-
-### 3. Dashboard
-
-![Dashboard](screenshots/dashboard.jpeg)
-
-### 4. My Notes Section
-
-![My Notes](screenshots/my_notes.jpeg)
-
-### 5. Add New Note
-
-![My Notes](screenshots/new_note.jpg)
-
-### 6. Note Preview Modal
-
-![Note Preview](screenshots/note_preview.jpeg)
-
-### 7. Download Note Dialog
-
-![Download Note](screenshots/download_note.png)
-
-### 8. My Images Section
-
-![My Images](screenshots/my_images.jpeg)
-
-### 9. Image Preview Modal
-
-![Image Preview](screenshots/image_preview.jpeg)
+- PHP (8.x recommended)
+- MySQL
+- HTML, Bootstrap 5, Font Awesome
 
 ---
 
 ## Installation & Setup
 
-1. **Clone the Repository**
+1. **Clone the repository**
     ```bash
     git clone https://github.com/tafsiruzzaman/NoteNest.git
     cd NoteNest
     ```
-
-2. **Create Database and Tables**
-    - Create a new MySQL database, e.g., `note_nest`.
-    - Use the following schema for full nested folder support:
-      ```sql
-      CREATE TABLE users (
-          id INT PRIMARY KEY AUTO_INCREMENT,
-          name VARCHAR(100) NOT NULL,
-          email VARCHAR(255) NOT NULL UNIQUE,
-          password VARCHAR(255) NOT NULL
-      );
-      CREATE TABLE note_folders (
-          id INT PRIMARY KEY AUTO_INCREMENT,
-          user_id INT NOT NULL,
-          folder_name VARCHAR(100) NOT NULL,
-          parent_id INT DEFAULT NULL,
-          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-          FOREIGN KEY (user_id) REFERENCES users(id),
-          FOREIGN KEY (parent_id) REFERENCES note_folders(id) ON DELETE CASCADE
-      );
-      CREATE TABLE notes (
-          id INT PRIMARY KEY AUTO_INCREMENT,
-          user_id INT NOT NULL,
-          folder_id INT DEFAULT NULL,
-          file_name VARCHAR(255) NOT NULL,
-          stored_file VARCHAR(255) NOT NULL,
-          uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-          FOREIGN KEY (user_id) REFERENCES users(id),
-          FOREIGN KEY (folder_id) REFERENCES note_folders(id) ON DELETE SET NULL
-      );
-      CREATE TABLE image_folders (
-          id INT PRIMARY KEY AUTO_INCREMENT,
-          user_id INT NOT NULL,
-          folder_name VARCHAR(100) NOT NULL,
-          parent_id INT DEFAULT NULL,
-          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-          FOREIGN KEY (user_id) REFERENCES users(id),
-          FOREIGN KEY (parent_id) REFERENCES image_folders(id) ON DELETE CASCADE
-      );
-      CREATE TABLE images (
-          id INT PRIMARY KEY AUTO_INCREMENT,
-          user_id INT NOT NULL,
-          folder_id INT DEFAULT NULL,
-          file_name VARCHAR(255) NOT NULL,
-          stored_file VARCHAR(255) NOT NULL,
-          uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-          FOREIGN KEY (user_id) REFERENCES users(id),
-          FOREIGN KEY (folder_id) REFERENCES image_folders(id) ON DELETE SET NULL
-      );
-      ```
-
-3. **Configure the Application**
-    - Update your database credentials in `config.php`.
-    - Ensure `/uploads/notes/` and `/uploads/images/` directories exist and are writable by your web server.
-    - Place the project folder in your web server's root (e.g., `htdocs/NoteNest/` for XAMPP).
-
-4. **Access and Test**
-    - Open your browser and navigate to `http://localhost/NoteNest`.
+2. **Create the database**
+    - Import `database.sql` into your MySQL server.
+3. **Configure the application**
+    - Update your database credentials in `config.php` if needed.
+    - Ensure the `uploads/notes/` and `img/user_photos/` directories exist and are writable.
+    - Place the project folder in your web server root (e.g., `htdocs/NoteNest/` for XAMPP).
+4. **Access the app**
+    - Open your browser and go to `http://localhost/NoteNest`.
 
 ---
 
-## Project Structure
-```
-/
-├── config.php              
-├── db.php                  
-├── register.php            
-├── login.php               
-├── dashboard.php           
-├── my_notes.php            
-├── my_images.php           
-├── note_download.php       
-├── note_preview.php        
-├── image_download.php      
-├── image_preview.php       
-├── uploads/
-│   ├── notes/              
-│   └── images/             
-├── css/
-│   └── dashboard.css       
-├── screenshots/            
-└── ...
-```
+## Main Files & Structure
+
+- `dashboard.php` — Main dashboard
+- `my_note_nest.php` — Personal files and folders
+- `shared_note_nest.php` — Files/folders shared with you
+- `favorites.php` — Favorites management
+- `todo.php` — Todo list and reminders
+- `profile.php` — User profile
+- `register.php`, `login.php`, `logout.php` — Authentication
+- `share.php`, `share_management.php` — Sharing and access management
+- `note_download.php`, `note_preview.php` — File download/preview
+- `notifications.php` — Notification system
+- `cron/todo_reminder.php` — Automated todo reminders
+- `includes/` — Auth, DB, functions, navbar
+- `uploads/notes/` — User files
+- `img/user_photos/` — User profile photos
+
+---
+
+## Security Highlights
+
+- Each user can only access their own files and folders
+- All file and form inputs are validated and sanitized
+- Passwords are hashed before storage
+- All database queries use prepared statements
+
+---
 
 ## Contributors
 
@@ -170,26 +84,16 @@ NoteNest is a secure, modern, and user-friendly personal cloud drive web applica
 
 ---
 
-## Security Highlights
+## Changes & Improvements in This Version
 
-- **User Data Isolation:** Each user can only see and manipulate their own files and folders.
-- **Input Validation:** Strict filetype and size checks for all uploads.
-- **Sanitization:** All file and form inputs are sanitized to prevent script injection and unsafe filenames.
-- **Password Security:** Passwords are hashed before storage in the DB.
-- **SQL Injection Protection:** All queries use prepared statements to prevent SQL injection.
-
----
-
-## Potential Enhancements
-
-- Multi-file and drag-and-drop uploads
-- User profile and password change/reset
-- File/folder sharing (private/public or with other users)
-- Advanced search and filter for notes/images
-- Tagging or metadata for files
-- Dark/light mode toggle
-- Activity log/history
-- Mobile PWA support
+- Added file and folder sharing with other users (view-only)
+- Added favorites system for quick access
+- Added todo list with reminders and notification system
+- Improved user profile management (photo, phone, gender, password)
+- Enhanced security: stricter input validation, prepared statements everywhere
+- Improved UI and navigation (Bootstrap 5, Font Awesome)
+- Added notification dropdown and unread count
+- Added cron job for todo reminders
 
 ---
 
@@ -197,4 +101,3 @@ NoteNest is a secure, modern, and user-friendly personal cloud drive web applica
 
 MIT License. © [@tafsiruzzaman](https://github.com/tafsiruzzaman), [@pritilatadea](https://github.com/pritilatadea), [@MonsurulHoqueAkib](https://github.com/MonsurulHoqueAkib), [@tjarin](https://github.com/tjarin)
 
----

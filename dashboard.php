@@ -4,6 +4,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
+require 'includes/db.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,46 +18,48 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-  <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center" href="dashboard.php">
-        <img src="img/fav.ico" height="45px" alt="">
-        <span class="brand-text fw-bold">NoteNest</span>
-    </a>
-    <div class="d-flex align-items-center ms-auto">
-        <span class="me-3 user-name text-secondary"><i class="fas fa-user-circle me-1"></i>
-          <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-        <a class="btn btn-link support-link" href="#" title="Support">
-            <i class="fas fa-life-ring"></i> Support
-        </a>
-        <a class="btn btn-link text-danger logout-link" href="logout.php" title="Logout">
-            <i class="fas fa-right-from-bracket"></i> Logout
-        </a>
-    </div>
-  </div>
-</nav>
+<?php include 'includes/navbar.php'; ?>
 
 <!-- Main Content -->
 <div class="container py-5">
     <div class="row justify-content-center g-4">
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-3">
             <div class="card text-center card-hov">
                 <div class="card-body">
-                    <i class="fas fa-note-sticky fa-2x mb-3" style="color: #0b4954"></i>
-                    <h5 class="card-title fw-bold">My Notes</h5>
-                    <p class="card-text text-muted">View, add, and manage your text notes securely in the cloud.</p>
-                    <a href="my_notes.php" class="btn btn-primary-cs">Open Notes</a>
+                    <i class="fa-solid fa-folder fa-2x mb-3" style="color: #0b4954"></i>
+                    <h5 class="card-title fw-bold">MyNoteNest</h5>
+                    <p class="card-text text-muted">Your personal folders and files.</p>
+                    <a href="my_note_nest.php" class="btn btn-primary-cs">Open</a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-3">
             <div class="card text-center card-hov">
                 <div class="card-body">
-                    <i class="fas fa-image fa-2x mb-3" style="color: #197f8f"></i>
-                    <h5 class="card-title fw-bold">My Images</h5>
-                    <p class="card-text text-muted">Upload and access your images from anywhere, anytime.</p>
-                    <a href="my_images.php" class="btn btn-success-cs">Open Images</a>
+                    <i class="fas fa-share-alt fa-2x mb-3" style="color: #197f8f"></i>
+                    <h5 class="card-title fw-bold">SharedNoteNest</h5>
+                    <p class="card-text text-muted">Folders/files shared with you.</p>
+                    <a href="shared_note_nest.php" class="btn btn-success-cs">Open</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="card text-center card-hov">
+                <div class="card-body">
+                    <i class="fas fa-list-check fa-2x mb-3" style="color: #e67e22"></i>
+                    <h5 class="card-title fw-bold">Todo</h5>
+                    <p class="card-text text-muted">Manage your tasks and reminders.</p>
+                    <a href="todo.php" class="btn todo-btn">Open</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="card text-center card-hov">
+                <div class="card-body">
+                    <i class="fas fa-star fa-2x mb-3" style="color: #f1c40f"></i>
+                    <h5 class="card-title fw-bold">Favorites</h5>
+                    <p class="card-text text-muted">Quick access to your favorites.</p>
+                    <a href="favorites.php" class="btn favo-btn">Open</a>
                 </div>
             </div>
         </div>

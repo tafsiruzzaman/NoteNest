@@ -1,7 +1,7 @@
 <!-- login.php -->
 <?php
 session_start();
-require 'db.php';
+require 'includes/db.php';
 
 $email = $password = "";
 $errors = [];
@@ -17,17 +17,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($errors)) {
         // Check if user exists
-        $stmt = $conn->prepare("SELECT id, name, password FROM users WHERE email = ?");
+        $stmt = $conn->prepare("SELECT id, name, password, phone, gender, photo FROM users WHERE email = ?");
         if ($stmt) {
             $stmt->bind_param("s", $email);
             $stmt->execute();
             $stmt->store_result();
             if ($stmt->num_rows == 1) {
-                $stmt->bind_result($id, $name, $hashed_password);
+                $stmt->bind_result($id, $name, $hashed_password, $phone, $gender, $photo);
                 $stmt->fetch();
                 if (password_verify($password, $hashed_password)) {
                     $_SESSION['user_id'] = $id;
                     $_SESSION['user_name'] = $name;
+                    $_SESSION['user_phone'] = $phone;
+                    $_SESSION['user_gender'] = $gender;
+                    $_SESSION['user_photo'] = $photo;
                     header("Location: dashboard.php");
                     exit();
                 } else {

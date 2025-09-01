@@ -3,5 +3,6 @@
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'note_nest');
+define('DB_NAME', 'notenest');
+require_once 'includes/db.php';
 ?>

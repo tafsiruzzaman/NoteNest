@@ -89,7 +89,7 @@ form {
     align-items: center;
 }
 
-input {
+input, select {
     font-family: 'Roboto', sans-serif;
     background: #f1f3f4;
     border: 1px solid #dadce0;
@@ -101,7 +101,7 @@ input {
     color: #202124;
     transition: border .2s;
 }
-input:focus {
+input:focus, select:focus {
     outline: none;
     border: 1.5px solid #1a73e8;
     background: #fff;

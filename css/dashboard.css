@@ -39,6 +39,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 2px 16px 0 rgba(26,115,232,0.04);
     border: 1px solid #f1f1f1;
+    margin-bottom: 2rem;
 }
 .card-header {
     border-radius: 12px 12px 0 0;
@@ -68,9 +69,19 @@ body {
     background-color: #197f8f;
     color: white;
 }
-.navbar {
-    margin-bottom: 1.5rem;
+.favo-btn {
+    border: 1px solid #0dcaf0; 
+    color: #0dcaf0;
 }
-.card {
-    margin-bottom: 2rem;
+.favo-btn:hover {
+    background-color: #0dcaf0; 
+    color: white;
+}   
+.todo-btn {
+    border: 1px solid #e67e22; 
+    color: #e67e22;
 }
+.todo-btn:hover {
+    background-color: #e67e22; 
+    color: white;
+}   
